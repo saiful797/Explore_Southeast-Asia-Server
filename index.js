@@ -39,8 +39,6 @@ async function run() {
         const result = await tourismSpotCollection.insertOne(newTouristSpot);
 
         res.send(result);
-
-        // console.log(newTouristSpot);
     })
 
 
