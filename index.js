@@ -27,13 +27,19 @@ async function run() {
 
     const tourismSpotCollection = client.db('tourismSpotDB').collection('tourismSpot');
 
+    app.get('/touristSpot', async(req, res) => {
+        const cursor = tourismSpotCollection.find();
+        const result = await cursor.toArray();
+        res.send(result);
+    })
+
     app.post('/touristSpot', async(req, res) => {
 
         const newTouristSpot = req.body;
         const result = await tourismSpotCollection.insertOne(newTouristSpot);
 
         res.send(result);
-        
+
         // console.log(newTouristSpot);
     })
 
