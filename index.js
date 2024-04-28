@@ -75,10 +75,15 @@ async function run() {
         res.send(result);
     })
 
-    //Get from country DB
+    //get, post from country DB
     app.get('/addCountry', async(req, res) => {
         const allCountry = countriesCollection.find();
         const result = await allCountry.toArray();
+        res.send(result);
+    })
+    app.post('/addCountry', async(req, res) => {
+        const newCountry = req.body;
+        const result = await countriesCollection.insertOne(newCountry);
         res.send(result);
     })
 
@@ -87,12 +92,6 @@ async function run() {
 
         const newTouristSpot = req.body;
         const result = await tourismSpotCollection.insertOne(newTouristSpot);
-        res.send(result);
-    })
-
-    app.post('/addCountry', async(req, res) => {
-        const newCountry = req.body;
-        const result = await countriesCollection.insertOne(newCountry);
         res.send(result);
     })
 
