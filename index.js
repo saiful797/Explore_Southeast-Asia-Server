@@ -25,10 +25,13 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
 
+    // for spot
     const tourismSpotCollection = client.db('tourismSpotDB').collection('tourismSpot');
 
+    // for countries
     const countriesCollection = client.db('tourismSpotDB').collection('countries');
 
+    //Get from spots DB
     app.get('/touristSpot', async(req, res) => {
         const cursor = tourismSpotCollection.find();
         const result = await cursor.toArray();
@@ -41,6 +44,15 @@ async function run() {
         res.send(result);
     })
 
+    app.get('/singleSpot/:id', async(req, res)=>{
+        const result = await tourismSpotCollection.findOne({_id: new ObjectId(req.params.id)})
+        res.send(result)
+        console.log(result);
+
+    })
+
+
+    //Get from country DB
     app.get('/addCountry', async(req, res) => {
         const allCountry = countriesCollection.find();
         const result = await allCountry.toArray();
