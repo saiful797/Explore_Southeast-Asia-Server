@@ -51,6 +51,10 @@ async function run() {
 
     })
 
+    // Update information spot
+    app.put('/updateSpot/:id', async(req, res) =>{
+        console.log(req.params.id);
+    })
 
     //Get from country DB
     app.get('/addCountry', async(req, res) => {
@@ -59,6 +63,7 @@ async function run() {
         res.send(result);
     })
 
+    // Post data in touristSpotDB
     app.post('/touristSpot', async(req, res) => {
 
         const newTouristSpot = req.body;
