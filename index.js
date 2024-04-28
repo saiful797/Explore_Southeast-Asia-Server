@@ -1,4 +1,4 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
@@ -36,12 +36,14 @@ async function run() {
     })
 
     app.get('/touristSpot/:userEmail', async(req, res) => {
-
-        console.log(req.params.email);
-        console.log(req.params.userEmail);
-
         const allSpots = tourismSpotCollection.find();
         const result = await allSpots.toArray();
+        res.send(result);
+    })
+
+    app.get('/addCountry', async(req, res) => {
+        const allCountry = countriesCollection.find();
+        const result = await allCountry.toArray();
         res.send(result);
     })
 
