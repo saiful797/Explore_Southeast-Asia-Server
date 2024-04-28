@@ -33,6 +33,16 @@ async function run() {
         res.send(result);
     })
 
+    app.get('/touristSpot/:userEmail', async(req, res) => {
+
+        console.log(req.params.email);
+        console.log(req.params.userEmail);
+
+        const allSpots = tourismSpotCollection.find();
+        const result = await allSpots.toArray();
+        res.send(result);
+    })
+
     app.post('/touristSpot', async(req, res) => {
 
         const newTouristSpot = req.body;
