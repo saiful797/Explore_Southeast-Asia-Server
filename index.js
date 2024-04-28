@@ -27,6 +27,8 @@ async function run() {
 
     const tourismSpotCollection = client.db('tourismSpotDB').collection('tourismSpot');
 
+    const countriesCollection = client.db('tourismSpotDB').collection('countries');
+
     app.get('/touristSpot', async(req, res) => {
         const cursor = tourismSpotCollection.find();
         const result = await cursor.toArray();
@@ -47,7 +49,12 @@ async function run() {
 
         const newTouristSpot = req.body;
         const result = await tourismSpotCollection.insertOne(newTouristSpot);
+        res.send(result);
+    })
 
+    app.post('/addCountry', async(req, res) => {
+        const newCountry = req.body;
+        const result = await countriesCollection.insertOne(newCountry);
         res.send(result);
     })
 
