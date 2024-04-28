@@ -53,7 +53,26 @@ async function run() {
 
     // Update information spot
     app.put('/updateSpot/:id', async(req, res) =>{
-        console.log(req.params.id);
+        //console.log(req.params.id);
+        const query = {_id: new ObjectId(req.params.id)};
+        const options = { upsert: true };
+        const data ={
+            $set:{
+                spot: req.body.spot,
+                photo: req.body.photo,
+                cost: req.body.cost,
+                country: req.body.country,
+                location: req.body.location,
+                time: req.body.time,
+                seasonality: req.body.seasonality,
+                visitors: req.body.visitors,
+                description: req.body.description
+            }
+        }
+
+        const result = await tourismSpotCollection.updateOne(query, data, options);
+        console.log(result);
+        res.send(result);
     })
 
     //Get from country DB
