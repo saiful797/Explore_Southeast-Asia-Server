@@ -71,7 +71,7 @@ async function run() {
         }
 
         const result = await tourismSpotCollection.updateOne(query, data, options);
-        console.log(result);
+        // console.log(result);
         res.send(result);
     })
 
@@ -93,6 +93,14 @@ async function run() {
     app.post('/addCountry', async(req, res) => {
         const newCountry = req.body;
         const result = await countriesCollection.insertOne(newCountry);
+        res.send(result);
+    })
+
+    // Delete Data from DB
+    app.delete('/deleteSpot/:id', async(req,res) => {
+        const id = req.params.id;
+        const query = { _id: new ObjectId(id) };
+        const result = await tourismSpotCollection.deleteOne(query);
         res.send(result);
     })
 
