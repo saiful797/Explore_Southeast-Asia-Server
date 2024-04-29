@@ -45,10 +45,16 @@ async function run() {
     })
 
     app.get('/singleSpot/:id', async(req, res)=>{
-        const result = await tourismSpotCollection.findOne({_id: new ObjectId(req.params.id)})
-        res.send(result)
-        console.log(result);
+        const result = await tourismSpotCollection.findOne({_id: new ObjectId(req.params.id)});
+        res.send(result);
+        // console.log(result);
 
+    })
+
+    app.get('/sortedSpots', async(req, res) =>{
+        const result = await tourismSpotCollection.find().sort({ cost: -1 }).toArray();
+        res.send(result);
+        console.log(result);
     })
 
     // Update information spot
