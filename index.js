@@ -53,9 +53,9 @@ async function run() {
     })
 
     app.get('/sortedSpots', async(req, res) =>{
-        const result = await tourismSpotCollection.find().sort({ cost: -1 }).toArray();
+        const result = await tourismSpotCollection.find({}).sort({ cost: 1 }).toArray();
         res.send(result);
-        console.log(result);
+        // console.log(result);
     })
 
     // Update information spot
